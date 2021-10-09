@@ -8,9 +8,14 @@ import (
 )
 
 // Global logger
-var Glogger = GetLogger("root")
+var Glogger = GetLogger("root", zap.DebugLevel)
 
-func GetLogger(name string) *zap.SugaredLogger {
+// SetGlogger
+func SetGlogger(name string, level zapcore.Level) {
+	Glogger = GetLogger(name, level)
+}
+
+func GetLogger(name string, level zapcore.Level) *zap.SugaredLogger {
 	encoderConfig := zapcore.EncoderConfig{
 		TimeKey:    "time",
 		LevelKey:   "level",
@@ -27,7 +32,7 @@ func GetLogger(name string) *zap.SugaredLogger {
 	}
 
 	// 设置日志级别
-	atom := zap.NewAtomicLevelAt(zap.DebugLevel)
+	atom := zap.NewAtomicLevelAt(level)
 	config := zap.Config{
 		Level:            atom,
 		Development:      false,
@@ -47,4 +52,3 @@ func JsonEncode(data interface{}) string {
 	jsonBytes, _ := json.Marshal(data)
 	return (string(jsonBytes))
 }
-
