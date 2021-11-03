@@ -14,6 +14,8 @@ type User struct{
 }
 
 func TestLogger(t *testing.T) {
+    fmt.Println("default log format:")
+    fmt.Println("datetime                	log_level project_name	code_path:line	<message>")
     // this log is named root
 	glogger.Glogger.Debug("This is a debug log")
 
