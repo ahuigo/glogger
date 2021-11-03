@@ -43,10 +43,11 @@ Refer to tests/logger_test.go
     $ make test
     go test -v ./tests
     === RUN   TestLogger
-    2021-11-03T19:49:35.754+0800	DEBUG	root	tests/logger_test.go:18	This is a debug log
-    2021-11-03T19:49:35.754+0800	INFO	proj	tests/logger_test.go:22	This is a info log
+    default log format:
+    datetime                	log_level project_name	code_path:line	<message>
+    2021-11-03T20:05:58.454+0800	DEBUG	root	tests/logger_test.go:20	This is a debug log
+    2021-11-03T20:05:58.454+0800	INFO	proj	tests/logger_test.go:24	This is a info log
     print data log
-    2021-11-03T19:49:35.754+0800	DEBUG	root	tests/logger_test.go:31	{name 1}
-    2021-11-03T19:49:35.754+0800	DEBUG	root	tests/logger_test.go:32	{"Name":"name","Age":1}
-    --- PASS: TestLogger (0.00s)
+    2021-11-03T20:05:58.454+0800	DEBUG	root	tests/logger_test.go:33	{name 1}
+    2021-11-03T20:05:58.454+0800	DEBUG	root	tests/logger_test.go:34	{"Name":"name","Age":1}
 
