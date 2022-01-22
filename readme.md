@@ -11,7 +11,6 @@ Refer to tests/logger_test.go
         "testing"
 
         "github.com/ahuigo/glogger"
-        "go.uber.org/zap"
         "fmt"
     )
 
@@ -22,10 +21,10 @@ Refer to tests/logger_test.go
 
     func TestLogger(t *testing.T) {
         // this log is named root
-        glogger.Glogger.Debug("This is a debug log")
+        glogger.Debug("This is a debug log")
 
         // get logger named with "proj"
-        logger:=glogger.GetLogger("proj", zap.InfoLevel)
+        logger:=glogger.GetLogger("proj", glogger.InfoLevel)
         logger.Info("This is a info log")
         logger.Debug("This is a debug log") //not printed
 
@@ -35,8 +34,7 @@ Refer to tests/logger_test.go
         }
         // print data log
         fmt.Println("print data log")
-        glogger.Glogger.Debug(user)
-        glogger.Glogger.Debug(glogger.JsonEncode(user))
+        glogger.Debug(user)
     }
 
 ## test
