@@ -92,7 +92,7 @@ func GetLogger(name string, level zapcore.Level) *zap.SugaredLogger {
 	return logger
 }
 
-/* The second type of builder
+/* The inner builder: Config.Build():
 var zapCores []zapcore.Core // zapcore.WriteSyncer, encoder, ...
 	writeSyncer:= zap.Open(outputPath.Path)
 	writeSyncer:= zapcore.AddSync(&lumberjackWrite)
