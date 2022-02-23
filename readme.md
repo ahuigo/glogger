@@ -49,3 +49,8 @@ Refer to tests/logger_test.go
     2021-11-03T20:05:58.454+0800	DEBUG	root	tests/logger_test.go:33	{name 1}
     2021-11-03T20:05:58.454+0800	DEBUG	root	tests/logger_test.go:34	{"Name":"name","Age":1}
 
+## Set Debug Mode
+Set `APP_ENV=dev`, then default logger will use `DebugLevel`
+
+    make test-dev
+    APP_ENV=dev go test ./tests

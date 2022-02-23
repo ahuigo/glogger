@@ -20,7 +20,15 @@ const (
 // zapcore.NewTee( zapcore.NewCore(consoleEncoder, consoleErrors, highPriority),
 
 // Global logger
-var glogger = GetLogger("root", zap.DebugLevel)
+var glogger *zap.SugaredLogger
+
+func init(){
+    if isInDev(){
+        glogger = GetLogger("root", zap.DebugLevel)
+    }else{
+        glogger = GetLogger("root", zap.InfoLevel)
+    }
+}
 
 func Error(args ...interface{}) {
 	glogger.Error(args...)
@@ -38,6 +46,10 @@ func Debug(args ...interface{}) {
 // SetGlogger
 func SetGlogger(name string, level zapcore.Level) {
 	glogger = GetLogger(name, level)
+}
+
+func isInDev() bool{
+    return os.Getenv("APP_ENV") == "dev"
 }
 
 /**
@@ -66,7 +78,7 @@ func GetLogger(name string, level zapcore.Level) *zap.SugaredLogger {
 
 	// 设置日志级别
 	encoding := "console"
-	if os.Getenv("APP_ENV") != "" && os.Getenv("APP_ENV") != "dev" {
+	if !isInDev() {
 		encoding = "json"
 	}
 	atom := zap.NewAtomicLevelAt(level)
