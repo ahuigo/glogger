@@ -22,25 +22,37 @@ const (
 // Global logger
 var glogger *zap.SugaredLogger
 
-func init(){
-    if isInDev(){
-        glogger = GetLogger("root", zap.DebugLevel)
-    }else{
-        glogger = GetLogger("root", zap.InfoLevel)
-    }
+func init() {
+	if isInDev() {
+		glogger = GetLogger("root", zap.DebugLevel)
+	} else {
+		glogger = GetLogger("root", zap.InfoLevel)
+	}
 }
 
 func Error(args ...interface{}) {
 	glogger.Error(args...)
 }
+func Errorf(format string, args ...interface{}) {
+	glogger.Errorf(format, args...)
+}
 func Warn(args ...interface{}) {
 	glogger.Warn(args...)
+}
+func Warnf(format string, args ...interface{}) {
+	glogger.Warnf(format, args...)
 }
 func Info(args ...interface{}) {
 	glogger.Info(args...)
 }
+func Infof(format string, args ...interface{}) {
+	glogger.Infof(format, args...)
+}
 func Debug(args ...interface{}) {
 	glogger.Debug(args...)
+}
+func Debugf(format string, args ...interface{}) {
+	glogger.Debugf(format, args...)
 }
 
 // SetGlogger
@@ -48,15 +60,12 @@ func SetGlogger(name string, level zapcore.Level) {
 	glogger = GetLogger(name, level)
 }
 
-func isInDev() bool{
-    return os.Getenv("APP_ENV") == "dev"
+func isInDev() bool {
+	return os.Getenv("APP_ENV") == "dev"
 }
 
 /**
-console and json ok
-trace with error ok
-level ok
-
+todo:
 output path:
 	rotate with date
 */
