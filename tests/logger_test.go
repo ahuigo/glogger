@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"os"
 	"testing"
 
 	"fmt"
@@ -34,4 +35,9 @@ func TestLogger(t *testing.T) {
 	glogger.Debug(user)
 	glogger.Error(user)
 	glogger.Debug(glogger.JsonEncode(user))
+
+	os.Setenv("APP_ENV", "")
+	logger = glogger.GetLogger("proj", zap.InfoLevel)
+	logger.Error(glogger.JsonEncode(user))
+
 }
